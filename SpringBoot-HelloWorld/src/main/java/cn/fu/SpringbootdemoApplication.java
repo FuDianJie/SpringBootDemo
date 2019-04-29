@@ -1,4 +1,4 @@
-package cn.fu.springbootdemo;
+package cn.fu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
