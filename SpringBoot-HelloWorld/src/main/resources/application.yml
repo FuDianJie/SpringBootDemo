@@ -1,1 +1,11 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .html
+server:
+  port: 8080
 
+logging:
+  level:  #控制日志级别 要 map类型
+    org.springframework: debug
