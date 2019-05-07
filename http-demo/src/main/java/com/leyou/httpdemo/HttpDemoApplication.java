@@ -15,6 +15,10 @@ public class HttpDemoApplication {
 		SpringApplication.run(HttpDemoApplication.class, args);
 	}
 
+	/**
+	 * spring自带得rest客户端
+	 * @return
+	 */
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
