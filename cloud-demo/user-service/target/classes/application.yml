@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.96.130.131:3306/leyou
+    username: root
+    password: root123456
+  application:
+    name: user-service
+  main:
+    allow-bean-definition-overriding: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true   #驼峰命名法
+  type-aliases-package: cn.fu.pojo  #别名扫描包
+eureka:
+  client:
+    service-url:    #注册地址
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1  #写死ip地址
+    lease-renewal-interval-in-seconds: 30 #最小续约周期
+    lease-expiration-duration-in-seconds: 90 #最小过期时间
+    #每隔30秒发次心跳，如果90秒还没回复则user-server挂了

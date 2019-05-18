@@ -1,0 +1,27 @@
+server:
+  port: 10010
+zuul:
+  routes: #配置路由规则
+    hehe:   #叫啥都行      USER-SERVICE
+      path: /consumer/**       #拦截匹配路径
+      serviceId: CONSUMER-DEMO      #提供者绝对路径
+      strip-prefix: false           #去除路由前缀  默认为true  
+    USER-SERVICE: /USER-SERVICE/**  #这是简化的  跟上面选一个
+    # 不过事实上 zuul 会默认从eureka上拉取服务 默认写成USER-SERVICE: /USER-SERVICE/**  类型
+    #所以你不写也没事
+  ignored-services:  #不想通过被网关注册  填写服务id
+    - consumer-service
+    - consumer-service1
+    - consumer-service2
+
+eureka: #通过注册eureka  通过服务id 来获取服务实例  不用写死ip
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+spring:
+  application:
+    name: gateway
+ribbon:   #zuul中默认含有ribbon 和 hystrix
+  ConnectionTimeout: 500  #连接超时
+  ReadTimeout: 4000       #读取超时
+  #ribbon的超时时长，真实值是(read+connect)*2,必须小于hystrix的时长

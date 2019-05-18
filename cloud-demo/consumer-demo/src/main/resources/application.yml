@@ -1,0 +1,31 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: consumer-demo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
+    registry-fetch-interval-seconds: 5  #拉取服务列表
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1  #写死ip地址
+user-server: #服务名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule #配置规则 最空闲连接策略
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 2500  #全局设置熔断超时时长2.5秒
+    user-service:
+      execution.isolation.thread.timeoutInMilliseconds: 1900  #专门为user-serivce设置时长1.9s
+
+# Feign配置  没有提示的
+#配置 Feign中的ribbo
+ribbon:
+  ConnectionTimeOut: 500 # 获取链接时的超时时长 -> 500毫秒 没有获取服务的链接则报错
+  ReadTimeOut: 2000      # 超过2秒钟没有获取数据   则报错
+feign:
+  hystrix:
+    enabled: true   #Feign中的 hystrix  默认是关闭的

@@ -1,0 +1,17 @@
+server:
+  port: 10086
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  client:
+    service-url:    #注册地址
+      defaultZone: http://127.0.0.1:10087/eureka  #为了不报错先让eureka注册自己
+    register-with-eureka: false #不注册自己
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1  #写死ip地址
+  server:
+    eviction-interval-timer-in-ms: 30000 #eureka剔除无效客户端实例默认60000毫秒=60秒
